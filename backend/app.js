@@ -1,28 +1,37 @@
 const express = require('express');
 const app = express();
-const mongooseconnect =  require('./config/db')
+const mongooseconnect = require('./config/db');
 const bodyParser = require('body-parser');
-require('dotenv').config()
-const cors = require("cors")
-const authRouter = require("./routes/authroutes")
-const cookieParser =  require('cookie-parser');
-const AccountRouter = require("./routes/accountroutes")
-const port = process.env.PORT || 5000
-mongooseconnect()
-app.use(cookieParser()); // To parse cookies
+require('dotenv').config();
+const cors = require("cors");
+const authRouter = require("./routes/authroutes");
+const cookieParser = require('cookie-parser');
+const AccountRouter = require("./routes/accountroutes");
+
+const port = process.env.PORT || 5000;
+
+// Connect to the database
+mongooseconnect();
+
+// Middleware
+app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-  }));
-app.use(bodyParser.json())
-app.use(express.json())
-app.use("/api/auth", authRouter)
-app.use("/api/account", AccountRouter)
+  origin: process.env.FRONTEND_URL,  // Use an environment variable for the frontend URL
+  credentials: true
+}));
+app.use(bodyParser.json());
+app.use(express.json());
 
-app.get("/",(req, res) =>{
-    res.send("Hello World!")  // This is a simple route to check the server is running or not.
-})
+// Routes
+app.use("/api/auth", authRouter);
+app.use("/api/account", AccountRouter);
 
-app.listen(port,() => {
-    console.log(`Server running on port ${port}`);
-})
+// Default route
+app.get("/", (req, res) => {
+  res.send("Hello World!");  // Simple route to check the server is running
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});

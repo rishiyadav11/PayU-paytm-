@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   const getUsers = async (filter) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/auth/user/bulk`, {
+      const response = await axios.get(`https://payu-paytm.onrender.com/api/auth/user/bulk`, {
         params: { filter },
         withCredentials: true,
       });

@@ -23,7 +23,7 @@ const Transection = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:3000/api/account/transfer",
+                "https://payu-paytm.onrender.com/api/account/transfer",
                 data,
                 { withCredentials: true }
             );

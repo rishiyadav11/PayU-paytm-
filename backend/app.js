@@ -16,9 +16,12 @@ mongooseconnect();
 // Middleware
 app.use(cookieParser());
 app.use(cors({
-  origin: process.env.FRONTEND_URL,  // Use an environment variable for the frontend URL
-  credentials: true
+    origin: process.env.FRONTEND_URL, // Allow only your frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    credentials: true // If you need to send cookies or other credentials
 }));
+app.options('*', cors()); // Preflight all routes
+
 app.use(bodyParser.json());
 app.use(express.json());
 

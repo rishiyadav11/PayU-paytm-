@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const getBalance = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/account/balance', {
+      const response = await axios.get('https://payu-paytm.onrender.com/api/account/balance', {
         withCredentials: true,
       });
 

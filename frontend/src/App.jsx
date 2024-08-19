@@ -11,7 +11,7 @@ const App = () => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/auth/islogin', { withCredentials: true });
+      const response = await axios.get('https://payu-paytm.onrender.com/api/auth/islogin', { withCredentials: true });
       // console.log(response)
       if (response.data.isAuthenticated) {
         setIsAuthenticated(true);
@@ -37,7 +37,7 @@ const App = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:3000/api/auth/logout', {}, { withCredentials: true });
+      await axios.post('https://payu-paytm.onrender.com/api/auth/logout', {}, { withCredentials: true });
       setIsAuthenticated(false);
       setFirstletter(null);
       setBgcolor(null);
